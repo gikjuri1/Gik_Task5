@@ -1,85 +1,73 @@
 package ru.Gik.Task5.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
 @Table(name = "tpp_product_register")
+@AllArgsConstructor
+@NoArgsConstructor
 public class TppProductRegister {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Getter
+    @Setter
     @Column(name = "product_id")
     private Long productId;
 
+    @Getter
+    @Setter
     @Column(name = "type")
     private String type;
 
+    @Getter
+    @Setter
     @Column(name = "account")
     private Long account;
 
+    @Getter
+    @Setter
     @Column(name = "currency_code")
     private String currencyCode;
 
+    @Getter
+    @Setter
     @Column(name = "state")
     private String state;
 
+    @Getter
+    @Setter
     @Column(name = "account_number")
     private String accountNumber;
 
-    public Long getId() {
-        return this.id;
-    }
+    /*@ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "type")
+    @Getter
+    @Setter
+    private TppRefProductRegisterType tppRefProductRegisterType;*/
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getProductId() {
-        return this.productId;
-    }
-
-    public void setProductId(Long productId) {
+    public TppProductRegister(Long productId, String type, Long account, String currencyCode, String state, String accountNumber) {
         this.productId = productId;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public void setType(String type) {
         this.type = type;
-    }
-
-    public Long getAccount() {
-        return this.account;
-    }
-
-    public void setAccount(Long account) {
         this.account = account;
-    }
-
-    public String getCurrencyCode() {
-        return this.currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
-    }
-
-    public String getState() {
-        return this.state;
-    }
-
-    public void setState(String state) {
         this.state = state;
-    }
-
-    public String getAccountNumber() {
-        return this.accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
+
+    @Override
+    public String toString()
+    {
+        return account+ " "+state;
+    }
+
 }

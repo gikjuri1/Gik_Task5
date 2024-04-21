@@ -1,52 +1,48 @@
 package ru.Gik.Task5.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "account")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "account_pool_id")
-    private Long accountPoolId;
-
+    @Getter
+    @Setter
     @Column(name = "account_number")
     private String accountNumber;
 
+    @Getter
+    @Setter
     @Column(name = "bussy")
-    private Boolean bussy;
+    private boolean bussy;
 
-    public Long getId() {
-        return this.id;
-    }
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "account_pool_id")
+    @Getter
+    @Setter
+    private AccountPool accountPool;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getAccountPoolId() {
-        return this.accountPoolId;
-    }
-
-    public void setAccountPoolId(Long accountPoolId) {
-        this.accountPoolId = accountPoolId;
-    }
-
-    public String getAccountNumber() {
-        return this.accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
+    public Account (String accountNumber, boolean bussy)
+    {
         this.accountNumber = accountNumber;
-    }
-
-    public Boolean getBussy() {
-        return this.bussy;
-    }
-
-    public void setBussy(Boolean bussy) {
         this.bussy = bussy;
+    }
+
+    @Override
+    public String toString()
+    {
+        return accountNumber+ " "+bussy;
     }
 }

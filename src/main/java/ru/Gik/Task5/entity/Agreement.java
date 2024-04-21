@@ -3,261 +3,163 @@ package ru.Gik.Task5.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "agreement")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Agreement {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_id")
-    private Long productId;
-
+    @Getter
+    @Setter
     @Column(name = "general_agreement_id")
     private String generalAgreementId;
 
+    @Getter
+    @Setter
     @Column(name = "supplementary_agreement_id")
     private String supplementaryAgreementId;
 
+    @Getter
+    @Setter
     @Column(name = "arrangement_type")
     private String arrangementType;
 
+    @Getter
+    @Setter
     @Column(name = "sheduler_job_id")
     private Long shedulerJobId;
 
+    @Getter
+    @Setter
     @Column(name = "number")
     private String number;
 
+    @Getter
+    @Setter
     @Column(name = "opening_date")
     private Date openingDate;
 
+    @Getter
+    @Setter
     @Column(name = "closing_date")
     private Date closingDate;
 
+    @Getter
+    @Setter
     @Column(name = "cancel_date")
     private Date cancelDate;
 
+    @Getter
+    @Setter
     @Column(name = "validity_duration")
     private Long validityDuration;
 
+    @Getter
+    @Setter
     @Column(name = "cancellation_reason")
     private String cancellationReason;
 
+    @Getter
+    @Setter
     @Column(name = "status")
     private String status;
 
+    @Getter
+    @Setter
     @Column(name = "interest_calculation_date")
     private Date interestCalculationDate;
 
+    @Getter
+    @Setter
     @Column(name = "interest_rate")
     private Double interestRate;
 
+    @Getter
+    @Setter
     @Column(name = "coefficient")
     private Double coefficient;
 
+    @Getter
+    @Setter
     @Column(name = "coefficient_action")
     private String coefficientAction;
 
+    @Getter
+    @Setter
     @Column(name = "minimum_interest_rate")
     private Double minimumInterestRate;
 
+    @Getter
+    @Setter
     @Column(name = "minimum_interest_rate_coefficient")
     private Double minimumInterestRateCoefficient;
 
+    @Getter
+    @Setter
     @Column(name = "minimum_interest_rate_coefficient_action")
     private String minimumInterestRateCoefficientAction;
 
+    @Getter
+    @Setter
     @Column(name = "maximal_interest_rate")
     private Double maximalInterestRate;
 
+    @Getter
+    @Setter
     @Column(name = "maximal_interest_rate_coefficient")
     private Double maximalInterestRateCoefficient;
 
+    @Getter
+    @Setter
     @Column(name = "maximal_interest_rate_coefficient_action")
     private String maximalInterestRateCoefficientAction;
 
-    public Long getId() {
-        return this.id;
-    }
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "product_id")
+    @Getter
+    @Setter
+    private TppProduct tppProduct;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getProductId() {
-        return this.productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getGeneralAgreementId() {
-        return this.generalAgreementId;
-    }
-
-    public void setGeneralAgreementId(String generalAgreementId) {
+    public Agreement(String generalAgreementId, String supplementaryAgreementId, String arrangementType, Long shedulerJobId, String number, Date openingDate, Date closingDate, Date cancelDate, Long validityDuration, String cancellationReason, String status, Date interestCalculationDate, Double interestRate, Double coefficient, String coefficientAction, Double minimumInterestRate, Double minimumInterestRateCoefficient, String minimumInterestRateCoefficientAction, Double maximalInterestRate, Double maximalInterestRateCoefficient, String maximalInterestRateCoefficientAction, TppProduct tppProduct) {
         this.generalAgreementId = generalAgreementId;
-    }
-
-    public String getSupplementaryAgreementId() {
-        return this.supplementaryAgreementId;
-    }
-
-    public void setSupplementaryAgreementId(String supplementaryAgreementId) {
         this.supplementaryAgreementId = supplementaryAgreementId;
-    }
-
-    public String getArrangementType() {
-        return this.arrangementType;
-    }
-
-    public void setArrangementType(String arrangementType) {
         this.arrangementType = arrangementType;
-    }
-
-    public Long getShedulerJobId() {
-        return this.shedulerJobId;
-    }
-
-    public void setShedulerJobId(Long shedulerJobId) {
         this.shedulerJobId = shedulerJobId;
-    }
-
-    public String getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(String number) {
         this.number = number;
-    }
-
-    public Date getOpeningDate() {
-        return this.openingDate;
-    }
-
-    public void setOpeningDate(Date openingDate) {
         this.openingDate = openingDate;
-    }
-
-    public Date getClosingDate() {
-        return this.closingDate;
-    }
-
-    public void setClosingDate(Date closingDate) {
         this.closingDate = closingDate;
-    }
-
-    public Date getCancelDate() {
-        return this.cancelDate;
-    }
-
-    public void setCancelDate(Date cancelDate) {
         this.cancelDate = cancelDate;
-    }
-
-    public Long getValidityDuration() {
-        return this.validityDuration;
-    }
-
-    public void setValidityDuration(Long validityDuration) {
         this.validityDuration = validityDuration;
-    }
-
-    public String getCancellationReason() {
-        return this.cancellationReason;
-    }
-
-    public void setCancellationReason(String cancellationReason) {
         this.cancellationReason = cancellationReason;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Date getInterestCalculationDate() {
-        return this.interestCalculationDate;
-    }
-
-    public void setInterestCalculationDate(Date interestCalculationDate) {
         this.interestCalculationDate = interestCalculationDate;
-    }
-
-    public Double getInterestRate() {
-        return this.interestRate;
-    }
-
-    public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
-    }
-
-    public Double getCoefficient() {
-        return this.coefficient;
-    }
-
-    public void setCoefficient(Double coefficient) {
         this.coefficient = coefficient;
-    }
-
-    public String getCoefficientAction() {
-        return this.coefficientAction;
-    }
-
-    public void setCoefficientAction(String coefficientAction) {
         this.coefficientAction = coefficientAction;
-    }
-
-    public Double getMinimumInterestRate() {
-        return this.minimumInterestRate;
-    }
-
-    public void setMinimumInterestRate(null minimumInterestRate) {
         this.minimumInterestRate = minimumInterestRate;
-    }
-
-    public Double getMinimumInterestRateCoefficient() {
-        return this.minimumInterestRateCoefficient;
-    }
-
-    public void setMinimumInterestRateCoefficient(null minimumInterestRateCoefficient) {
         this.minimumInterestRateCoefficient = minimumInterestRateCoefficient;
-    }
-
-    public String getMinimumInterestRateCoefficientAction() {
-        return this.minimumInterestRateCoefficientAction;
-    }
-
-    public void setMinimumInterestRateCoefficientAction(String minimumInterestRateCoefficientAction) {
         this.minimumInterestRateCoefficientAction = minimumInterestRateCoefficientAction;
-    }
-
-    public Double getMaximalInterestRate() {
-        return this.maximalInterestRate;
-    }
-
-    public void setMaximalInterestRate(null maximalInterestRate) {
         this.maximalInterestRate = maximalInterestRate;
-    }
-
-    public Double getMaximalInterestRateCoefficient() {
-        return this.maximalInterestRateCoefficient;
-    }
-
-    public void setMaximalInterestRateCoefficient(null maximalInterestRateCoefficient) {
         this.maximalInterestRateCoefficient = maximalInterestRateCoefficient;
-    }
-
-    public String getMaximalInterestRateCoefficientAction() {
-        return this.maximalInterestRateCoefficientAction;
-    }
-
-    public void setMaximalInterestRateCoefficientAction(String maximalInterestRateCoefficientAction) {
         this.maximalInterestRateCoefficientAction = maximalInterestRateCoefficientAction;
+        this.tppProduct = tppProduct;
     }
+
+    @Override
+    public String toString()
+    {
+        return number+ " "+status;
+    }
+
 }

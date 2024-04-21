@@ -3,206 +3,140 @@ package ru.Gik.Task5.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tpp_product")
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class TppProduct {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    @Getter
+    @Setter
     @Column(name = "product_code_id")
     private Long productCodeId;
 
+    @Getter
+    @Setter
     @Column(name = "client_id")
     private Long clientId;
 
+    @Getter
+    @Setter
     @Column(name = "type")
     private String type;
 
+    @Getter
+    @Setter
     @Column(name = "number")
     private String number;
 
+    @Getter
+    @Setter
     @Column(name = "priority")
     private Long priority;
 
+    @Getter
+    @Setter
     @Column(name = "date_of_conclusion")
     private Date dateOfConclusion;
 
+    @Getter
+    @Setter
     @Column(name = "start_date_time")
     private Date startDateTime;
 
+    @Getter
+    @Setter
     @Column(name = "end_date_time")
     private Date endDateTime;
 
+    @Getter
+    @Setter
     @Column(name = "days")
     private Long days;
 
+    @Getter
+    @Setter
     @Column(name = "penalty_rate")
     private Double penaltyRate;
 
+    @Getter
+    @Setter
     @Column(name = "nso")
     private Double nso;
 
+    @Getter
+    @Setter
     @Column(name = "threshold_amount")
     private Double thresholdAmount;
 
+    @Getter
+    @Setter
     @Column(name = "requisite_type")
     private String requisiteType;
 
+    @Getter
+    @Setter
     @Column(name = "interest_rate_type")
     private String interestRateType;
 
+    @Getter
+    @Setter
     @Column(name = "tax_rate")
     private Double taxRate;
 
+    @Getter
+    @Setter
     @Column(name = "reasone_close")
     private String reasoneClose;
 
+    @Getter
+    @Setter
     @Column(name = "state")
     private String state;
 
-    public Long getId() {
-        return this.id;
-    }
+    @Getter //!!!!
+    @Setter //!!!!
+    @OneToMany(mappedBy = "tppProduct", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<Agreement> agreementSet = new HashSet<Agreement>();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getProductCodeId() {
-        return this.productCodeId;
-    }
-
-    public void setProductCodeId(Long productCodeId) {
+    public TppProduct(Long productCodeId, Long clientId, String type, String number, Long priority, Date dateOfConclusion, Date startDateTime, Date endDateTime, Long days, Double penaltyRate, Double nso, Double thresholdAmount, String requisiteType, String interestRateType, Double taxRate, String reasoneClose, String state, Set<Agreement> agreementSet) {
         this.productCodeId = productCodeId;
-    }
-
-    public Long getClientId() {
-        return this.clientId;
-    }
-
-    public void setClientId(Long clientId) {
         this.clientId = clientId;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public void setType(String type) {
         this.type = type;
-    }
-
-    public String getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(String number) {
         this.number = number;
-    }
-
-    public Long getPriority() {
-        return this.priority;
-    }
-
-    public void setPriority(Long priority) {
         this.priority = priority;
-    }
-
-    public Date getDateOfConclusion() {
-        return this.dateOfConclusion;
-    }
-
-    public void setDateOfConclusion(Date dateOfConclusion) {
         this.dateOfConclusion = dateOfConclusion;
-    }
-
-    public Date getStartDateTime() {
-        return this.startDateTime;
-    }
-
-    public void setStartDateTime(Date startDateTime) {
         this.startDateTime = startDateTime;
-    }
-
-    public Date getEndDateTime() {
-        return this.endDateTime;
-    }
-
-    public void setEndDateTime(Date endDateTime) {
         this.endDateTime = endDateTime;
-    }
-
-    public Long getDays() {
-        return this.days;
-    }
-
-    public void setDays(Long days) {
         this.days = days;
-    }
-
-    public Double getPenaltyRate() {
-        return this.penaltyRate;
-    }
-
-    public void setPenaltyRate(Double penaltyRate) {
         this.penaltyRate = penaltyRate;
-    }
-
-    public Double getNso() {
-        return this.nso;
-    }
-
-    public void setNso(Double nso) {
         this.nso = nso;
-    }
-
-    public Double getThresholdAmount() {
-        return this.thresholdAmount;
-    }
-
-    public void setThresholdAmount(Double thresholdAmount) {
         this.thresholdAmount = thresholdAmount;
-    }
-
-    public String getRequisiteType() {
-        return this.requisiteType;
-    }
-
-    public void setRequisiteType(String requisiteType) {
         this.requisiteType = requisiteType;
-    }
-
-    public String getInterestRateType() {
-        return this.interestRateType;
-    }
-
-    public void setInterestRateType(String interestRateType) {
         this.interestRateType = interestRateType;
-    }
-
-    public Double getTaxRate() {
-        return this.taxRate;
-    }
-
-    public void setTaxRate(Double taxRate) {
         this.taxRate = taxRate;
-    }
-
-    public String getReasoneClose() {
-        return this.reasoneClose;
-    }
-
-    public void setReasoneClose(String reasoneClose) {
         this.reasoneClose = reasoneClose;
-    }
-
-    public String getState() {
-        return this.state;
-    }
-
-    public void setState(String state) {
         this.state = state;
+        this.agreementSet = agreementSet;
     }
+
+    @Override
+    public String toString()
+    {
+        return number+ " "+priority;
+    }
+
 }
