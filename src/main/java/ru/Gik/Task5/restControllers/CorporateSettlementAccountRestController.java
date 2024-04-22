@@ -6,35 +6,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.Gik.Task5.dto.AccountDTO;
+import ru.Gik.Task5.dto.CSAccountAnsDTO;
+import ru.Gik.Task5.dto.CSAccountReqDTO;
 import ru.Gik.Task5.service.AccountService;
+import ru.Gik.Task5.service.CSAccountService;
 
 @RestController
-@RequestMapping("/corporate-settlement-account/")
+@RequestMapping("/corporate-settlement-account")
 public class CorporateSettlementAccountRestController {
-    @Autowired
-    private final AccountService accountService;
 
     @Autowired
-    public CorporateSettlementAccountRestController(AccountService accountService) {
-        this.accountService = accountService;
+    private final CSAccountService CSaccountService;
+
+    @Autowired
+    public CorporateSettlementAccountRestController(CSAccountService CSaccountService) {
+        this.CSaccountService = CSaccountService;
     }
 
-    @PostMapping(value = "/create", headers = "content-type=text/json")
-    public ResponseEntity<AccountDTO> createAccount(@Valid @RequestBody AccountDTO ddto){
+    @PostMapping(value = "/create", headers = "content-type=application/json")
+    public ResponseEntity<CSAccountAnsDTO> createAccount(@Valid @RequestBody CSAccountReqDTO ddto){
 
-        var accreg = accountService.addAccount(ddto);
+        var accreg = CSaccountService.addAccount(ddto);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<AccountDTO> getAccountById (@PathVariable(name = "id") Long id)
-    {
-        var acc = accountService.getById(id);
-        AccountDTO ddto = new AccountDTO(id,
-                null,acc.get().getAccountNumber(),acc.get().isBussy());
-
-        return new ResponseEntity<AccountDTO>(ddto, HttpStatus.OK);
+        //return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(accreg);
     }
 
 }
