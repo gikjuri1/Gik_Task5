@@ -1,12 +1,20 @@
 package ru.Gik.Task5.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public record TppProductRegisterDTO (
-     Long id,
+        @NotNull(message = "Не должен быть пустым")
+        Long id,
      Long productId,
-     String type,
+        @Size(min = 0, max = 100)
+        String type,
      Long account,
-     String currencyCode,
-     String state,
-     String accountNumber
+        @Size(min = 0, max = 50)
+        String currencyCode,
+        @Size(min = 0, max = 50)
+        String state,
+        @Size(min = 0, max = 25)
+        String accountNumber
 )
 {}

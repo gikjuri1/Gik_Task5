@@ -1,30 +1,43 @@
 package ru.Gik.Task5.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Date;
 
 public record AgreementDTO (
-     Long id,
+        @NotNull(message = "Не должен быть пустым")
+        Long id,
      Long productId,
-     String generalAgreementId,
-     String supplementaryAgreementId,
-     String arrangementType,
+        @Size(min = 0, max = 50)
+        String generalAgreementId,
+        @Size(min = 0, max = 50)
+        String supplementaryAgreementId,
+        @Size(min = 0, max = 50)
+        String arrangementType,
      Long shedulerJobId,
-     String number,
+        @Size(min = 0, max = 50)
+        String number,
      Date openingDate,
      Date closingDate,
      Date cancelDate,
      Long validityDuration,
-     String cancellationReason,
-     String status,
+        @Size(min = 0, max = 100)
+        String cancellationReason,
+        @Size(min = 0, max = 50)
+        String status,
      Date interestCalculationDate,
      Double interestRate,
      Double coefficient,
-     String coefficientAction,
+        @Size(min = 0, max = 50)
+        String coefficientAction,
      Double minimumInterestRate,
      Double minimumInterestRateCoefficient,
+        @Size(min = 0, max = 50)
      String minimumInterestRateCoefficientAction,
      Double maximalInterestRate,
      Double maximalInterestRateCoefficient,
-     String maximalInterestRateCoefficientAction
+        @Size(min = 0, max = 50)
+        String maximalInterestRateCoefficientAction
 )
 {}
