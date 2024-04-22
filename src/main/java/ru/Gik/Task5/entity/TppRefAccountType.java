@@ -26,11 +26,10 @@ public class TppRefAccountType {
     @Column(name = "value")
     private String value;
 
-    /*@Getter //!!!!
+    @Getter //!!!!
     @Setter //!!!!
-    @OneToMany(mappedBy = "tppRefProductRegisterType", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "value")
-    Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet = new HashSet<TppRefProductRegisterType>();*/
+    @OneToMany(mappedBy = "tppRefAccountType", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet = new HashSet<TppRefProductRegisterType>();
 
     public TppRefAccountType(String value) {
         this.value = value;

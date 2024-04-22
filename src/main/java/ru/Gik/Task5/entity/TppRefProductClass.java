@@ -55,11 +55,10 @@ public class TppRefProductClass {
     @Column(name = "subclass_name")
     private String subclassName;
 
-    /*@Getter //!!!!
+    @Getter //!!!!
     @Setter //!!!!
-    @OneToMany(mappedBy = "tppRefProductRegisterType", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "value")
-    Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet = new HashSet<TppRefProductRegisterType>();*/
+    @OneToMany(mappedBy = "tppRefProductClass", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet = new HashSet<TppRefProductRegisterType>();
 
     public TppRefProductClass(String value, String gbiCode, String gbiName, String productRowCode, String productRowName, String subclassCode, String subclassName, Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet) {
         //this.value = value;

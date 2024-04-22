@@ -23,20 +23,20 @@ public class TppRefProductRegisterType {
     @Column(name = "internal_id")
     private Long internalId;
 
-    /*@Getter
+    @Getter
     @Setter
     @Column(name = "value")
-    private String value;*/
+    private String value;
 
     @Getter
     @Setter
     @Column(name = "register_type_name")
     private String registerTypeName;
 
-    @Getter
+    /*@Getter
     @Setter
     @Column(name = "product_class_code")
-    private String productClassCode;
+    private String productClassCode;*/
 
     @Getter
     @Setter
@@ -48,46 +48,45 @@ public class TppRefProductRegisterType {
     @Column(name = "register_type_end_date")
     private Date registerTypeEndDate;
 
-    @Getter
+    /*@Getter
     @Setter
     @Column(name = "account_type")
-    private String accountType;
+    private String accountType;*/
 
-    /*@ManyToOne
+    @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "product_class_code")
     @Getter
     @Setter
-    private TppRefProductClass tppRefProductRegisterType;*/
+    private TppRefProductClass tppRefProductClass;
 
-    /*@ManyToOne
+    @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "account_type")
     @Getter
     @Setter
-    private TppRefAccountType tppRefAccountType;*/
+    private TppRefAccountType tppRefAccountType;
 
-    /*@Getter //!!!!
+    @Getter //!!!!
     @Setter //!!!!
-    @JoinColumn(name = "value")
-    @OneToMany(mappedBy = "tppProductRegister", cascade = CascadeType.ALL, orphanRemoval = true)
-    Set<TppProductRegister> tppProductRegisterSet = new HashSet<TppProductRegister>();*/
+    @OneToMany(mappedBy = "tppRefProductRegisterType", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<TppProductRegister> tppProductRegisterSet = new HashSet<TppProductRegister>();
 
 
     public TppRefProductRegisterType(String value, String registerTypeName, String productClassCode, Date registerTypeStartDate, Date registerTypeEndDate, String accountType, TppRefProductClass tppRefProductRegisterType) {
         //this.value = value;
         this.registerTypeName = registerTypeName;
-        this.productClassCode = productClassCode;
+        //this.productClassCode = productClassCode;
         this.registerTypeStartDate = registerTypeStartDate;
         this.registerTypeEndDate = registerTypeEndDate;
-        this.accountType = accountType;
+        //this.accountType = accountType;
         //this.tppRefProductRegisterType = tppRefProductRegisterType;
     }
 
     @Override
     public String toString()
     {
-        return accountType+ " "+registerTypeName;
+        return registerTypeName;
     }
 
 }
