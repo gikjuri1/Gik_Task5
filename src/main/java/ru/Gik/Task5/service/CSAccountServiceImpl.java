@@ -9,6 +9,7 @@ import ru.Gik.Task5.dto.CSAccountAnsDTO;
 import ru.Gik.Task5.dto.CSAccountReqDTO;
 import ru.Gik.Task5.entity.Account;
 import ru.Gik.Task5.repo.MyRepoAccount;
+import ru.Gik.Task5.exception.ResourceNotFoundException;
 
 @RequiredArgsConstructor
 @Service
@@ -20,9 +21,15 @@ public class CSAccountServiceImpl implements CSAccountService{
     public CSAccountAnsDTO addAccount(CSAccountReqDTO ddto) {
         //var acc = new Account(ddto.accountNumber(),ddto.bussy());
         System.out.println("I'm in CSAccountAnsDTO addAccount");
-        CSAccountAnsDTO ret = new CSAccountAnsDTO("1");
 
+
+        //STEP 1
+        if(ddto.instanceId() == null) {
+            throw new ResourceNotFoundException("Not found Resource");
+        }
+        CSAccountAnsDTO ret = new CSAccountAnsDTO("1");
         return ret;
+
         //return myRepoAccount.save(acc);
     }
 

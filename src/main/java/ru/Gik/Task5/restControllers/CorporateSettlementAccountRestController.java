@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.Gik.Task5.dto.AccountDTO;
 import ru.Gik.Task5.dto.CSAccountAnsDTO;
 import ru.Gik.Task5.dto.CSAccountReqDTO;
+import ru.Gik.Task5.exception.ResourceNotFoundException;
 import ru.Gik.Task5.service.AccountService;
 import ru.Gik.Task5.service.CSAccountService;
 
@@ -29,6 +30,7 @@ public class CorporateSettlementAccountRestController {
         var accreg = CSaccountService.addAccount(ddto);
 
         //return new ResponseEntity<>(HttpStatus.CREATED);
+        //throw new ResourceNotFoundException("Not found Resource");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(accreg);
