@@ -1,0 +1,52 @@
+package ru.Gik.Task5.dto;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public record CSInstanceReqDTO(
+        Integer instanceId,
+        String productType,
+        String ProductCode,
+        String registerType,
+                String mdmCode,
+        String contractNumber,
+        Date contractDate,
+        Integer priority,
+        Float interestRatePenalty,
+        Float  minimalBalance,
+        Float thresholdAmount,
+        String accountingDetails,
+                String rateType,
+        Float taxPercentageRate,
+        Float technicalOverdraftLimitAmount,
+        Integer contractId,
+        String BranchCode,
+        String IsoCurrencyCode,
+        String urgencyCode,
+        Integer ReferenceCode,
+        String additionalPropertiesVip,
+        String object,
+        String instanceArrangement,
+        String GeneralAgreementId,
+        String SupplementaryAgreementId,
+        String arrangementType,
+        Integer shedulerJobId,
+        String Number,
+        Date openingDate,
+        Date closingDate,
+        Date CancelDate,
+        Integer validityDuration,
+        String cancellationReason,
+        String Status,
+        Date interestCalculationDate,
+        Float interestRate,
+        Float coefficient,
+        String coefficientAction,
+        Float minimumInterestRate,
+        String minimumInterestRateCoefficient,
+        String minimumInterestRateCoefficientAction,
+        BigDecimal maximalnterestRate,
+                BigDecimal maximalnterestRateCoefficient,
+        String maximalnterestRateCoefficientAction
+        ) {
+}
