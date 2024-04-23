@@ -68,7 +68,7 @@ public class CSInstanceServiceImpl implements CSInstanceService{
             probe12.setNumber(ddto.number());
             Example<Agreement> example12=Example.of(probe12);
             if(myRepoAgreement.exists(example12)) {
-                throw new DuplicatesException("Параметр № Дополнительного соглашения (сделки) Number уже существует для ЭП с ИД " + ddto.contractNumber());
+                throw new DuplicatesException("Параметр № Дополнительного соглашения (сделки) Number уже существует для ЭП с ИД " + ddto.number());
             }
 
             //STEP 1.3
@@ -122,6 +122,14 @@ public class CSInstanceServiceImpl implements CSInstanceService{
             Example<TppProduct> example21=Example.of(probe21);
             if(!myRepoTppProduct.exists(example21)) {
                 throw new ResourceNotFoundException("Экземпляр продукта с параметром instanceId не найден: " + ddto.instanceId());
+            }
+            //STEP 2.2
+            //Проверка - есть ли запись в таблице договоров
+            Agreement probe12 = new Agreement();
+            probe12.setNumber(ddto.number());
+            Example<Agreement> example12=Example.of(probe12);
+            if(myRepoAgreement.exists(example12)) {
+                throw new DuplicatesException("Параметр № Дополнительного соглашения (сделки) Number уже существует для ЭП с ИД " + ddto.contractNumber());
             }
 
         }
