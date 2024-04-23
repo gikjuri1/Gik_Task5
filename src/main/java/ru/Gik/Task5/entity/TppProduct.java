@@ -112,7 +112,7 @@ public class TppProduct {
     @OneToMany(mappedBy = "tppProduct", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Agreement> agreementSet = new HashSet<Agreement>();
 
-    public TppProduct(Long productCodeId, Long clientId, String type, String number, Long priority, Date dateOfConclusion, Date startDateTime, Date endDateTime, Long days, Double penaltyRate, Double nso, Double thresholdAmount, String requisiteType, String interestRateType, Double taxRate, String reasoneClose, String state, Set<Agreement> agreementSet) {
+    public TppProduct(Long productCodeId, Long clientId, String type, String number, Long priority, Date dateOfConclusion, Date startDateTime, Date endDateTime, Long days, Double penaltyRate, Double nso, Double thresholdAmount, String requisiteType, String interestRateType, Double taxRate, String reasoneClose, String state) {
         this.productCodeId = productCodeId;
         this.clientId = clientId;
         this.type = type;
@@ -130,7 +130,6 @@ public class TppProduct {
         this.taxRate = taxRate;
         this.reasoneClose = reasoneClose;
         this.state = state;
-        this.agreementSet = agreementSet;
     }
 
     @Override

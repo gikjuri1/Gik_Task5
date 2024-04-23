@@ -37,7 +37,7 @@ public class CSInstanceServiceImpl implements CSInstanceService{
 
         //STEP 1
         if(ddto.productType().isEmpty()
-        || ddto.productCode().isEmpty()
+        || ddto.productCode() == null
                 || ddto.registerType().isEmpty()
         || ddto.mdmCode().isEmpty()
                 || ddto.contractNumber().isEmpty()
@@ -74,14 +74,14 @@ public class CSInstanceServiceImpl implements CSInstanceService{
             //STEP 1.3
             //Ищем в классификаторе продуктов
             TppRefProductClass probe13 = new TppRefProductClass();
-            probe13.setValue(ddto.productCode());
+            probe13.setValue(Long.toString(ddto.productCode()));
             Example<TppRefProductClass> example13=Example.of(probe13);
             if(!myRepoTppRefProductClass.exists(example13)) {
                 throw new ResourceNotFoundException("No information found in ProductClass");
             }
             //Ищем в реестре продуктов
             TppRefProductRegisterType probe131 = new TppRefProductRegisterType();
-            probe131.setProductClassCode(ddto.productCode());
+            probe131.setProductClassCode(Long.toString(ddto.productCode()));
             probe131.setAccountType("Клиентский");
             Example<TppRefProductRegisterType> example131=Example.of(probe131);
             if(!myRepoTppRefProductRegisterType.exists(example131)) {
@@ -90,6 +90,27 @@ public class CSInstanceServiceImpl implements CSInstanceService{
 
             //Запоминаем массив ProductRegisterType
             List<TppRefProductRegisterType> lprt = myRepoTppRefProductRegisterType.findAll(example131);
+
+            //STEP 1.4
+            //Добавляем продукт
+            myRepoTppProduct.save(new TppProduct(ddto.productCode(),
+                    0L,
+                    ddto.productType(),
+                    ddto.number(),
+                    ddto.priority(),
+                    ddto.contractDate(),
+                    ddto.openingDate(),
+                    ddto.closingDate(),
+                    0L,
+                    0.0,
+                    0.0,
+                    ddto.thresholdAmount(),
+                    "",
+                    "",
+                    0.0,
+                    "",
+                    ddto.status()
+                    ));
         }
         /*
         //STEP 2
