@@ -12,6 +12,8 @@ import org.hibernate.annotations.Cascade;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account {
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

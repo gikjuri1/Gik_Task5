@@ -13,6 +13,8 @@ import org.hibernate.annotations.Cascade;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TppProductRegister {
+    @Getter
+    @Setter
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +59,7 @@ public class TppProductRegister {
 
     public TppProductRegister(Long productId, String type, Long account, String currencyCode, String state, String accountNumber) {
         this.productId = productId;
-        //this.type = type;
+        this.type = type;
         this.account = account;
         this.currencyCode = currencyCode;
         this.state = state;
