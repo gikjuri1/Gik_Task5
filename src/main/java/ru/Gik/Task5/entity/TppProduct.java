@@ -17,6 +17,8 @@ import java.util.Set;
 @NoArgsConstructor
 
 public class TppProduct {
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

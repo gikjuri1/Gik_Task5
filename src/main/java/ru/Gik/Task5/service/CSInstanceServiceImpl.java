@@ -111,6 +111,19 @@ public class CSInstanceServiceImpl implements CSInstanceService{
                     "",
                     ddto.status()
                     ));
+            //STEP 1.5 - непонятно, откуда брать данные (в исходном запросе нет номера счета, кода валюты и т.п.)
+        }
+        if(ddto.instanceId()!=null) {
+            //STEP 2.1
+            //Проверка - есть ли запись в таблице продуктов
+            System.out.println("I'm in 2.1");
+            TppProduct probe21 = new TppProduct();
+            probe21.setId(ddto.instanceId());
+            Example<TppProduct> example21=Example.of(probe21);
+            if(!myRepoTppProduct.exists(example21)) {
+                throw new ResourceNotFoundException("Экземпляр продукта с параметром instanceId не найден: " + ddto.instanceId());
+            }
+
         }
         /*
         //STEP 2

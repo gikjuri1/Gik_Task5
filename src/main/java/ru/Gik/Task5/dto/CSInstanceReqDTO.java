@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public record CSInstanceReqDTO(
-        Integer instanceId,
+        Long instanceId,
         String productType,
         Long productCode,
         String registerType,
