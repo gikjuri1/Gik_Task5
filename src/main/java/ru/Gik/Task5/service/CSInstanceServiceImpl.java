@@ -36,12 +36,26 @@ public class CSInstanceServiceImpl implements CSInstanceService{
     public CSInstanceAnsDTO addInstance(CSInstanceReqDTO ddto) {
         //var acc = new Account(ddto.accountNumber(),ddto.bussy());
         System.out.println("I'm in CSInstanceAnsDTO addInstance");
-        /*Long ret_accId=1L;
+        //Long ret_accId=1L;
 
         //STEP 1
-        if(ddto.instanceId() == null) {
+        if(ddto.productType().isEmpty()
+        || ddto.productCode().isEmpty()
+                || ddto.registerType().isEmpty()
+        || ddto.mdmCode().isEmpty()
+                || ddto.contractNumber().isEmpty()
+                || ddto.contractDate() == null
+                || ddto.priority() == null
+                || ddto.contractId()==null
+                || ddto.branchCode().isEmpty()
+                || ddto.isoCurrencyCode().isEmpty()
+                || ddto.urgencyCode().isEmpty()
+                || ddto.number().isEmpty()
+                || ddto.openingDate()==null
+        ){
             throw new ValidationFieldsException("Fields not validated");
         }
+        /*
         //STEP 2
         //Проверка - есть ли запись в таблице продуктов
         TppProductRegister probe = new TppProductRegister();
