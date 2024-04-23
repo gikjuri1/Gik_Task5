@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.Gik.Task5.dto.AccountDTO;
 import ru.Gik.Task5.dto.CSAccountAnsDTO;
 import ru.Gik.Task5.dto.CSAccountReqDTO;
-import ru.Gik.Task5.exception.ResourceNotFoundException;
+import ru.Gik.Task5.exception.*;
 import ru.Gik.Task5.service.AccountService;
 import ru.Gik.Task5.service.CSAccountService;
 
@@ -26,14 +26,19 @@ public class CorporateSettlementAccountRestController {
 
     @PostMapping(value = "/create", headers = "content-type=application/json")
     public ResponseEntity<CSAccountAnsDTO> createAccount(@Valid @RequestBody CSAccountReqDTO ddto){
-
-        var accreg = CSaccountService.addAccount(ddto);
-
+        var accreg = new CSAccountAnsDTO("1");
+        try {
+            accreg = CSaccountService.addAccount(ddto);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(accreg);
+        } catch (ValidationFieldsException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(accreg);
+        }
         //return new ResponseEntity<>(HttpStatus.CREATED);
         //throw new ResourceNotFoundException("Not found Resource");
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(accreg);
     }
 
 }

@@ -9,7 +9,7 @@ import ru.Gik.Task5.dto.CSAccountAnsDTO;
 import ru.Gik.Task5.dto.CSAccountReqDTO;
 import ru.Gik.Task5.entity.Account;
 import ru.Gik.Task5.repo.MyRepoAccount;
-import ru.Gik.Task5.exception.ResourceNotFoundException;
+import ru.Gik.Task5.exception.*;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +25,7 @@ public class CSAccountServiceImpl implements CSAccountService{
 
         //STEP 1
         if(ddto.instanceId() == null) {
-            throw new ResourceNotFoundException("Not found Resource");
+            throw new ValidationFieldsException("Fields not validated");
         }
         CSAccountAnsDTO ret = new CSAccountAnsDTO("1");
         return ret;
