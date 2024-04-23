@@ -9,17 +9,11 @@ import ru.Gik.Task5.dto.CSAccountAnsDTO;
 import ru.Gik.Task5.dto.CSAccountReqDTO;
 import ru.Gik.Task5.dto.CSInstanceAnsDTO;
 import ru.Gik.Task5.dto.CSInstanceReqDTO;
-import ru.Gik.Task5.entity.Account;
-import ru.Gik.Task5.entity.AccountPool;
-import ru.Gik.Task5.entity.TppProductRegister;
-import ru.Gik.Task5.entity.TppRefProductRegisterType;
+import ru.Gik.Task5.entity.*;
 import ru.Gik.Task5.exception.DuplicatesException;
 import ru.Gik.Task5.exception.ResourceNotFoundException;
 import ru.Gik.Task5.exception.ValidationFieldsException;
-import ru.Gik.Task5.repo.MyRepoAccount;
-import ru.Gik.Task5.repo.MyRepoAccountPool;
-import ru.Gik.Task5.repo.MyRepoTppProductRegister;
-import ru.Gik.Task5.repo.MyRepoTppRefProductRegisterType;
+import ru.Gik.Task5.repo.*;
 
 import java.util.List;
 
@@ -32,6 +26,8 @@ public class CSInstanceServiceImpl implements CSInstanceService{
     private final MyRepoTppProductRegister myRepoTppProductRegister;
     private final MyRepoTppRefProductRegisterType myRepoTppRefProductRegisterType;
     private final MyRepoAccountPool myRepoAccountPool;
+    private final MyRepoTppProduct  myRepoTppProduct;
+    private final MyRepoAgreement myRepoAgreement;
 
     public CSInstanceAnsDTO addInstance(CSInstanceReqDTO ddto) {
         //var acc = new Account(ddto.accountNumber(),ddto.bussy());
@@ -54,6 +50,26 @@ public class CSInstanceServiceImpl implements CSInstanceService{
                 || ddto.openingDate()==null
         ){
             throw new ValidationFieldsException("Fields not validated");
+        }
+        //STEP 2
+        if(ddto.instanceId()==null) {
+            //STEP 1.1
+            //Проверка - есть ли запись в таблице продуктов
+            TppProduct probe = new TppProduct();
+            probe.setNumber(ddto.contractNumber());
+            Example<TppProduct> example=Example.of(probe);
+            if(myRepoTppProduct.exists(example)) {
+                throw new DuplicatesException("№ договора <значение> уже существует для ЭП с ИД " + ddto.contractNumber());
+            }
+            //STEP 1.2
+            //Проверка - есть ли запись в таблице договоров
+            Agreement probe12 = new Agreement();
+            probe12.setNumber(ddto.number());
+            Example<Agreement> example12=Example.of(probe12);
+            if(myRepoAgreement.exists(example12)) {
+                throw new DuplicatesException("Параметр № Дополнительного соглашения (сделки) Number уже существует для ЭП с ИД " + ddto.contractNumber());
+            }
+
         }
         /*
         //STEP 2
