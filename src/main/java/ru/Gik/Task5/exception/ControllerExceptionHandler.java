@@ -14,7 +14,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ErrorMessage resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(200, new Date(),"Resource not found","");
+        ErrorMessage message = new ErrorMessage(404, new Date(),"Resource not found","");
         return message;
     }
 

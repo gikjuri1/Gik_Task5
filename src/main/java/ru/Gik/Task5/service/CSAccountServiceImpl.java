@@ -10,9 +10,11 @@ import ru.Gik.Task5.dto.CSAccountAnsDTO;
 import ru.Gik.Task5.dto.CSAccountReqDTO;
 import ru.Gik.Task5.entity.Account;
 import ru.Gik.Task5.entity.TppProductRegister;
+import ru.Gik.Task5.entity.TppRefProductRegisterType;
 import ru.Gik.Task5.repo.MyRepoAccount;
 import ru.Gik.Task5.exception.*;
 import ru.Gik.Task5.repo.MyRepoTppProductRegister;
+import ru.Gik.Task5.repo.MyRepoTppRefProductRegisterType;
 
 @RequiredArgsConstructor
 @Service
@@ -21,6 +23,7 @@ public class CSAccountServiceImpl implements CSAccountService{
     @Autowired
     private final MyRepoAccount myRepoAccount;
     private final MyRepoTppProductRegister myRepoTppProductRegister;
+    private final MyRepoTppRefProductRegisterType myRepoTppRefProductRegisterType;
 
     public CSAccountAnsDTO addAccount(CSAccountReqDTO ddto) {
         //var acc = new Account(ddto.accountNumber(),ddto.bussy());
@@ -37,8 +40,16 @@ public class CSAccountServiceImpl implements CSAccountService{
         probe.setProductId(ddto.instanceId());
         probe.setType(ddto.registryTypeCode());
         Example<TppProductRegister> example=Example.of(probe);
-        if(!myRepoTppProductRegister.exists(example)) {
+        if(myRepoTppProductRegister.exists(example)) {
             throw new DuplicatesException("Exist duplicates");
+        }
+
+        //STEP 3
+        TppRefProductRegisterType probe3 = new TppRefProductRegisterType();
+        probe3.setValue(ddto.registryTypeCode());
+        Example<TppRefProductRegisterType> example3=Example.of(probe3);
+        if(!myRepoTppRefProductRegisterType.exists(example3)) {
+            throw new ResourceNotFoundException("No resource found");
         }
 
         CSAccountAnsDTO ret = new CSAccountAnsDTO("1");
