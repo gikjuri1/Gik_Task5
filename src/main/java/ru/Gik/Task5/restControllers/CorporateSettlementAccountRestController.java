@@ -26,7 +26,7 @@ public class CorporateSettlementAccountRestController {
 
     @PostMapping(value = "/create", headers = "content-type=application/json")
     public ResponseEntity<CSAccountAnsDTO> createAccount(@Valid @RequestBody CSAccountReqDTO ddto){
-        var accreg = new CSAccountAnsDTO("1");
+        var accreg = new CSAccountAnsDTO(1L);
         try {
             accreg = CSaccountService.addAccount(ddto);
             return ResponseEntity

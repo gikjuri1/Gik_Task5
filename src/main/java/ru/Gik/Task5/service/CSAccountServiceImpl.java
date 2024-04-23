@@ -35,7 +35,7 @@ public class CSAccountServiceImpl implements CSAccountService{
     public CSAccountAnsDTO addAccount(CSAccountReqDTO ddto) {
         //var acc = new Account(ddto.accountNumber(),ddto.bussy());
         System.out.println("I'm in CSAccountAnsDTO addAccount");
-
+        Long ret_accId=1L;
 
         //STEP 1
         if(ddto.instanceId() == null) {
@@ -95,7 +95,17 @@ public class CSAccountServiceImpl implements CSAccountService{
                 new TppProductRegister(ddto.instanceId(),ddto.registryTypeCode(),accId,ddto.currencyCode(),"2",accNum));
 
         //Возвращаем ответ
-        CSAccountAnsDTO ret = new CSAccountAnsDTO("1");
+        TppProductRegister probe6 = new TppProductRegister();
+        probe.setProductId(ddto.instanceId());
+        probe.setType(ddto.registryTypeCode());
+        Example<TppProductRegister> example6=Example.of(probe6);
+        if(myRepoTppProductRegister.exists(example6)) {
+            List <TppProductRegister> tpr = myRepoTppProductRegister.findAll(example6);
+            TppProductRegister tp=tpr.get(0);
+            ret_accId=tp.getId();
+        }
+
+        CSAccountAnsDTO ret = new CSAccountAnsDTO(ret_accId);
         return ret;
 
 
