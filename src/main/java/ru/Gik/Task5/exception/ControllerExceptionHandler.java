@@ -23,4 +23,12 @@ public class ControllerExceptionHandler {
     public ErrorMessage validationFieldsException(ValidationFieldsException ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(400, new Date(),"Fields not validated","");
         return message;
-    }}
+    }
+    @ExceptionHandler(DuplicatesException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage DuplicatesException(ValidationFieldsException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(400, new Date(),"Fields are duplicated","");
+        return message;
+    }
+
+}

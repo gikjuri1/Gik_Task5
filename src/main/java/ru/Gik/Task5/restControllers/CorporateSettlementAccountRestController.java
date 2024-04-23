@@ -36,6 +36,10 @@ public class CorporateSettlementAccountRestController {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(accreg);
+        } catch (DuplicatesException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(accreg);
         }
         //return new ResponseEntity<>(HttpStatus.CREATED);
         //throw new ResourceNotFoundException("Not found Resource");

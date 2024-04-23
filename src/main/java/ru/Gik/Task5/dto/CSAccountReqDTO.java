@@ -1,7 +1,7 @@
 package ru.Gik.Task5.dto;
 
 public record CSAccountReqDTO(
-        Integer instanceId,
+        Long instanceId,
         String registryTypeCode,
         String accountType,
         String currencyCode,

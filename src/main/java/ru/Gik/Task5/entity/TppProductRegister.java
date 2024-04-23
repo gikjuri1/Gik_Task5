@@ -23,10 +23,10 @@ public class TppProductRegister {
     @Column(name = "product_id")
     private Long productId;
 
-    /*@Getter
+    @Getter
     @Setter
     @Column(name = "type")
-    private String type;*/
+    private String type;
 
     @Getter
     @Setter
@@ -48,12 +48,12 @@ public class TppProductRegister {
     @Column(name = "account_number")
     private String accountNumber;
 
-    @ManyToOne
+    /*@ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "type")
     @Getter
     @Setter
-    private TppRefProductRegisterType tppRefProductRegisterType;
+    private TppRefProductRegisterType tppRefProductRegisterType;*/
 
     public TppProductRegister(Long productId, String type, Long account, String currencyCode, String state, String accountNumber) {
         this.productId = productId;

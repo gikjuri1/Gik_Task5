@@ -67,10 +67,10 @@ public class TppRefProductRegisterType {
     @Setter
     private TppRefAccountType tppRefAccountType;
 
-    @Getter //!!!!
+    /*@Getter //!!!!
     @Setter //!!!!
     @OneToMany(mappedBy = "tppRefProductRegisterType", cascade = CascadeType.ALL, orphanRemoval = true)
-    Set<TppProductRegister> tppProductRegisterSet = new HashSet<TppProductRegister>();
+    Set<TppProductRegister> tppProductRegisterSet = new HashSet<TppProductRegister>();*/
 
 
     public TppRefProductRegisterType(String value, String registerTypeName, String productClassCode, Date registerTypeStartDate, Date registerTypeEndDate, String accountType, TppRefProductClass tppRefProductRegisterType) {
