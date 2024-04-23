@@ -33,10 +33,10 @@ public class TppRefProductRegisterType {
     @Column(name = "register_type_name")
     private String registerTypeName;
 
-    /*@Getter
+    @Getter
     @Setter
     @Column(name = "product_class_code")
-    private String productClassCode;*/
+    private String productClassCode;
 
     @Getter
     @Setter
@@ -48,24 +48,24 @@ public class TppRefProductRegisterType {
     @Column(name = "register_type_end_date")
     private Date registerTypeEndDate;
 
-    /*@Getter
+    @Getter
     @Setter
     @Column(name = "account_type")
-    private String accountType;*/
+    private String accountType;
 
-    @ManyToOne
+    /*@ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "product_class_code")
     @Getter
     @Setter
-    private TppRefProductClass tppRefProductClass;
+    private TppRefProductClass tppRefProductClass;*/
 
-    @ManyToOne
+    /*@ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "account_type")
     @Getter
     @Setter
-    private TppRefAccountType tppRefAccountType;
+    private TppRefAccountType tppRefAccountType;*/
 
     /*@Getter //!!!!
     @Setter //!!!!
@@ -73,14 +73,14 @@ public class TppRefProductRegisterType {
     Set<TppProductRegister> tppProductRegisterSet = new HashSet<TppProductRegister>();*/
 
 
-    public TppRefProductRegisterType(String value, String registerTypeName, String productClassCode, Date registerTypeStartDate, Date registerTypeEndDate, String accountType, TppRefProductClass tppRefProductRegisterType) {
-        //this.value = value;
+    public TppRefProductRegisterType(String value, String registerTypeName, String productClassCode, Date registerTypeStartDate, Date registerTypeEndDate, String accountType) {
+        this.value = value;
         this.registerTypeName = registerTypeName;
-        //this.productClassCode = productClassCode;
+        this.productClassCode = productClassCode;
         this.registerTypeStartDate = registerTypeStartDate;
         this.registerTypeEndDate = registerTypeEndDate;
-        //this.accountType = accountType;
-        //this.tppRefProductRegisterType = tppRefProductRegisterType;
+        this.accountType = accountType;
+
     }
 
     @Override

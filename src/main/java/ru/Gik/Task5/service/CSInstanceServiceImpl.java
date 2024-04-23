@@ -28,6 +28,7 @@ public class CSInstanceServiceImpl implements CSInstanceService{
     private final MyRepoAccountPool myRepoAccountPool;
     private final MyRepoTppProduct  myRepoTppProduct;
     private final MyRepoAgreement myRepoAgreement;
+    private final MyRepoTppRefProductClass myRepoTppRefProductClass;
 
     public CSInstanceAnsDTO addInstance(CSInstanceReqDTO ddto) {
         //var acc = new Account(ddto.accountNumber(),ddto.bussy());
@@ -70,6 +71,25 @@ public class CSInstanceServiceImpl implements CSInstanceService{
                 throw new DuplicatesException("Параметр № Дополнительного соглашения (сделки) Number уже существует для ЭП с ИД " + ddto.contractNumber());
             }
 
+            //STEP 1.3
+            //Ищем в классификаторе продуктов
+            TppRefProductClass probe13 = new TppRefProductClass();
+            probe13.setValue(ddto.productCode());
+            Example<TppRefProductClass> example13=Example.of(probe13);
+            if(!myRepoTppRefProductClass.exists(example13)) {
+                throw new ResourceNotFoundException("No information found in ProductClass");
+            }
+            //Ищем в реестре продуктов
+            TppRefProductRegisterType probe131 = new TppRefProductRegisterType();
+            probe131.setProductClassCode(ddto.productCode());
+            probe131.setAccountType("Клиентский");
+            Example<TppRefProductRegisterType> example131=Example.of(probe131);
+            if(!myRepoTppRefProductRegisterType.exists(example131)) {
+                throw new ResourceNotFoundException("No information found in ProductRegisterType");
+            }
+
+            //Запоминаем массив ProductRegisterType
+            List<TppRefProductRegisterType> lprt = myRepoTppRefProductRegisterType.findAll(example131);
         }
         /*
         //STEP 2

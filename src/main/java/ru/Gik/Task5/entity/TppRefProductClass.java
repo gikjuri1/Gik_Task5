@@ -20,10 +20,10 @@ public class TppRefProductClass {
     @Column(name = "internal_id")
     private Long internalId;
 
-    /*@Getter
+    @Getter
     @Setter
     @Column(name = "value")
-    private String value;*/
+    private String value;
 
     @Getter
     @Setter
@@ -55,13 +55,13 @@ public class TppRefProductClass {
     @Column(name = "subclass_name")
     private String subclassName;
 
-    @Getter //!!!!
+    /*@Getter //!!!!
     @Setter //!!!!
     @OneToMany(mappedBy = "tppRefProductClass", cascade = CascadeType.ALL, orphanRemoval = true)
-    Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet = new HashSet<TppRefProductRegisterType>();
+    Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet = new HashSet<TppRefProductRegisterType>();*/
 
     public TppRefProductClass(String value, String gbiCode, String gbiName, String productRowCode, String productRowName, String subclassCode, String subclassName, Set<TppRefProductRegisterType> tppRefProductRegisterTypeSet) {
-        //this.value = value;
+        this.value = value;
         this.gbiCode = gbiCode;
         this.gbiName = gbiName;
         this.productRowCode = productRowCode;
