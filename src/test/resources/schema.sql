@@ -5,3 +5,11 @@ CREATE TABLE IF NOT EXISTS artefact
 );
 
 insert into artefact (name) values ('tree'), ('crystal'), ('tree'),('tree'),('box');
+
+CREATE TABLE IF NOT EXISTS account(
+                                      id serial PRIMARY KEY,
+                                      account_pool_id integer,
+                                      account_number VARCHAR(25),
+                                      bussy BOOLEAN
+);
+

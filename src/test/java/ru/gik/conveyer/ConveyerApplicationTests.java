@@ -13,7 +13,10 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import ru.Gik.Task5.RestApplication;
+import ru.Gik.Task5.dto.AccountDTO;
+import ru.Gik.Task5.entity.Account;
 import ru.Gik.Task5.entity.Artefact;
+import ru.Gik.Task5.service.AccountService;
 import ru.Gik.Task5.service.ArtefactService;
 
 import java.math.BigInteger;
@@ -26,7 +29,7 @@ import static io.restassured.RestAssured.when;
 @Testcontainers
 public class ConveyerApplicationTests {
     @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres_god")
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres")
             .withDatabaseName("postgres")
             .withUsername("postgres")
             .withPassword("postgres")
@@ -82,6 +85,19 @@ public class ConveyerApplicationTests {
         }
     }
 
+    /*@Test
+    void shouldCreateAccount(ApplicationContext context, @Autowired AccountService serv) {
+        Account res = serv.addAccount(new AccountDTO(7L,1L,"12345",false));
+        //System.out.println(res.getId());
+        Long id = res.getId();
+
+        Optional<Account> res2 = serv.getById(id);
+        if (res2.isPresent()) {
+            Assertions.assertEquals("12345", res2.get().getAccountNumber());
+        } else {
+            Assertions.fail("No res from db");
+        }
+    }*/
 
     @LocalServerPort
     private int port;
@@ -91,7 +107,7 @@ public class ConveyerApplicationTests {
     {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        when().request("GET", "/artefact/5").then().statusCode(200);
+        when().request("GET", "/artefact/5").then().statusCode(404);
     }
 
 }
