@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <option name="projectDefaultTargetUuid" value="864d7969-eb70-488a-8ede-40a427ae36c3" />
+    <targets>
+      <target name="client-backend" type="docker-compose" uuid="864d7969-eb70-488a-8ede-40a427ae36c3">
+        <config>
+          <option name="targetPlatform">
+            <TargetPlatform />
+          </option>
+          <option name="configurationFiles">
+            <list>
+              <option value="D:\Java_projects\Gik_Task5\docker-compose.yml" />
+            </list>
+          </option>
+          <option name="serviceName" value="client-backend" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config />
+        </ContributedStateBase>
+      </target>
+      <target name="client-backend2" type="docker-compose" uuid="772098f4-a59b-4b8b-8d8d-5bea0cdf7771">
+        <config>
+          <option name="targetPlatform">
+            <TargetPlatform />
+          </option>
+          <option name="configurationFiles">
+            <list>
+              <option value="D:\Java_projects\Gik_Task5\docker-compose.yml" />
+            </list>
+          </option>
+          <option name="envs">
+            <map>
+              <entry key="JAVA_HOME" value="D:\Java21" />
+            </map>
+          </option>
+          <option name="serviceName" value="client-backend" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/usr/java/openjdk-17" />
+            <option name="javaVersionString" value="17.0.2" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
