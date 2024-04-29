@@ -15,11 +15,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import ru.Gik.Task5.RestApplication;
 import ru.Gik.Task5.dto.AccountDTO;
 import ru.Gik.Task5.entity.Account;
-import ru.Gik.Task5.entity.Artefact;
+import ru.Gik.Task5.entity.AccountPool;
+import ru.Gik.Task5.service.AccountPoolService;
 import ru.Gik.Task5.service.AccountService;
-import ru.Gik.Task5.service.ArtefactService;
 
-import java.math.BigInteger;
 import java.util.Optional;
 
 import static io.restassured.RestAssured.when;
@@ -72,42 +71,41 @@ public class ConveyerApplicationTests {
     }
 
     @Test
-    void shouldCreateArtefact(ApplicationContext context, @Autowired ArtefactService serv) {
-        Artefact res = serv.saveArtefact(new Artefact("testArt1"));
-        //System.out.println(res.getId());
-        Integer id = res.getId();
-
-        Optional<Artefact> res2 = serv.getArtefactbyId(BigInteger.valueOf(id));
-        if (res2.isPresent()) {
-            Assertions.assertEquals("testArt1", res2.get().getName());
-        } else {
-            Assertions.fail("No res from db");
-        }
-    }
-
-    /*@Test
     void shouldCreateAccount(ApplicationContext context, @Autowired AccountService serv) {
         Account res = serv.addAccount(new AccountDTO(7L,1L,"12345",false));
         //System.out.println(res.getId());
         Long id = res.getId();
 
-        Optional<Account> res2 = serv.getById(id);
+        Optional<Account> res2 = serv.getAccountbyId(id);
         if (res2.isPresent()) {
             Assertions.assertEquals("12345", res2.get().getAccountNumber());
         } else {
             Assertions.fail("No res from db");
         }
-    }*/
+    }
+
+    @Test
+    void shouldCreateAccountPool(ApplicationContext context, @Autowired AccountPoolService serv) {
+        AccountPool res = serv.saveAccountPool(new AccountPool( "0023","800", "16", "00", "03.012.002_47533_ComSoLd"));
+
+        Long id = res.getId();
+
+        Optional<AccountPool> res2 = serv.getAccountPoolbyId(id);
+        if (res2.isPresent()) {
+            Assertions.assertEquals("0023", res2.get().getBranchCode());
+        } else {
+            Assertions.fail("No res from db");
+        }
+    }
 
     @LocalServerPort
     private int port;
 
     @Test
-    void shouldCreateArtefactFromREST() //RestAssured
+    void getAccountFromREST() //RestAssured
     {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        when().request("GET", "/artefact/5").then().statusCode(404);
+        when().request("GET", "/accounts/1").then().statusCode(200);
     }
-
 }

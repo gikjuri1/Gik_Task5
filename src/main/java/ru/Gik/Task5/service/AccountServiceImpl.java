@@ -27,5 +27,10 @@ public class AccountServiceImpl implements AccountService{
         var acc = new Account(ddto.accountNumber(),ddto.bussy());
         return myRepoAccount.save(acc);
     }
+    public Optional<Account> getAccountbyId(Long id)
+    {
+        return myRepoAccount.findById(id);
+
+    }
 
 }

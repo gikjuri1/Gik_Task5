@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface AccountService {
     Optional<Account> getById(Long id);
     Account addAccount(@Valid AccountDTO ddto);
-
+    Optional<Account> getAccountbyId(Long id);
 }
